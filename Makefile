@@ -1,11 +1,22 @@
+BINARY_NAME = helix-bridgectl
+VERSION ?= 0.1.0
 
-.PHONY: dev
-dev: build
-	./helix-bridgectl
+.PHONY: build
+build:
+	go build -o $(BINARY_NAME) ./cmd/helix-bridgectl
 
-.PHONY: watch
-watch:
-	@while true; do \
-		make build; \
-		inotifywait -q -e modify -r . --exclude '\.git/'; \
-	done
+.PHONY: test
+test:
+	go test ./...
+
+.PHONY: clean
+clean:
+	rm -f $(BINARY_NAME)
+
+.PHONY: install
+install: build
+	sudo mv $(BINARY_NAME) /usr/local/bin/
+
+.PHONY: run
+run: build
+	./$(BINARY_NAME)

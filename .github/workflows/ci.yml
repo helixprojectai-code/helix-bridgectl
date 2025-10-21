@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test and Build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.23.1'
+        cache: true
+
+    - name: Build
+      run: make build
+
+    - name: Test
+      run: make test
+
+    - name: Run basic tests
+      run: |
+        ./helix-bridgectl --version
+        ./helix-bridgectl --help

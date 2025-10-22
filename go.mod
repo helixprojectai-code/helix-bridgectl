@@ -3,7 +3,7 @@ module github.com/helixprojectai-code/helix-bridgectl
 go 1.23.1
 
 require (
-	github.com/helixprojectai-code/helix-sdk-go v0.1.0
+	github.com/helixprojectai-code/helix-sdk-go v0.0.0-00010101000000-000000000000
 	github.com/spf13/cobra v1.10.1
 )
 
